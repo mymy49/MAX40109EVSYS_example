@@ -36,7 +36,7 @@
       arm_endian="Little"
       arm_fp_abi="Hard"
       arm_fpu_type="FPv4-SP-D16"
-      arm_linker_heap_size="1024"
+      arm_linker_heap_size="65536"
       arm_linker_process_stack_size="2048"
       arm_linker_stack_size="2048"
       arm_simulator_memory_simulation_filename="$(TargetsDir)/MAX32665/Simulator/MAX32665_SimulatorMemory_$(HostOS)_$(HostArch)$(HostDLLExt)"
