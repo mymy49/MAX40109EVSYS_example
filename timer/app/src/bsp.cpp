@@ -117,18 +117,21 @@ void initializeBoard()
 	timer1.initialize(10);
 	timer1.setIsrForUpdate(isr_timer1);
 	timer1.enableInterrupt();
+	timer1.start();
 
 	// timer2: 100 Hz interrupt — isr_timer2() increments gTimer2Counter
 	timer2.enableClock();
 	timer2.initialize(100);
 	timer2.setIsrForUpdate(isr_timer2);
 	timer2.enableInterrupt();
+	timer2.start();
 
 	// timer3: 1 kHz interrupt — isr_timer3() increments gTimer3Counter
 	timer3.enableClock();
 	timer3.initialize(1000);
 	timer3.setIsrForUpdate(isr_timer3);
 	timer3.enableInterrupt();
+	timer3.start();
 }
 
 /**
@@ -148,10 +151,12 @@ void initializeBoardOnCpu1()
 	timer4.initialize(10000);
 	timer4.setIsrForUpdate(isr_timer4);
 	timer4.enableInterrupt();
+	timer4.start();
 
 	// timer5: 100 kHz interrupt — isr_timer5() increments gTimer5Counter
 	timer5.enableClock();
 	timer5.initialize(100000);
 	timer5.setIsrForUpdate(isr_timer5);
 	timer5.enableInterrupt();
+	timer5.start();
 }

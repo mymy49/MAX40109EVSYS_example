@@ -50,7 +50,7 @@
 /// Selects which on-chip timer peripheral provides the system tick for
 /// `runtime::getMsec()`, `runtime::getUsec()`, etc.
 /// Valid values: RUNTIME_TMR0 ~ RUNTIME_TMR5
-#define YSS_TIMER			RUNTIME_TMR0
+#define YSS_RUNTIME_TIMER	RUNTIME_TMR0
 
 /// Number of SysTick clock cycles allocated per thread per scheduling quantum
 /// (time slice). A larger value means each thread runs longer before being

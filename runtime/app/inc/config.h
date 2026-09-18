@@ -30,7 +30,7 @@
 // ===================== Scheduler Configuration =====================
 /// Timer device used to drive the runtime (scheduler tick) function.
 /// Valid options: RUNTIME_TMR0 ~ RUNTIME_TMR5
-#define YSS_TIMER			RUNTIME_TMR0
+#define YSS_RUNTIME_TIMER	RUNTIME_TMR0
 
 /// Number of SysTick clocks allocated per thread time-slice.
 #define THREAD_GIVEN_CLOCK	20000

@@ -7,11 +7,11 @@
 
 /**
  * @file config.h
- * @brief yss RTOS and peripheral build-time configuration for the LED blink example.
+ * @brief yss RTOS and peripheral build-time configuration for the timer example.
  *
  * @details
  * Contains compile-time configuration settings for the yss RTOS framework
- * targeting the MAX40109EVSYS evaluation board (Nuvoton M251 series MCU).
+ * targeting the MAX40109EVSYS evaluation board (MAX32665 MCU).
  *
  * ### How to Use
  * Copy this file into your project's include directory (`app/inc/`) and
@@ -50,7 +50,7 @@
 /// Selects which on-chip timer peripheral provides the system tick for
 /// `runtime::getMsec()`, `runtime::getUsec()`, etc.
 /// Valid values: RUNTIME_TMR0 ~ RUNTIME_TMR5
-#define YSS_RUNTIME_TIMER	RUNTIME_TMR0
+#define YSS_RUNTIME_TIMER	RUNTIME_TMR2
 
 /// Number of SysTick clock cycles allocated per thread per scheduling quantum
 /// (time slice). A larger value means each thread runs longer before being
@@ -94,49 +94,26 @@
 // @note Only enable peripherals that are actually used by your application.
 // =============================================================================
 
-/// @defgroup PeripheralEnable Peripheral Enable Flags
+/// @defgroup TimerEnable Timer Enable Flags
 /// @{
 
-// --- BPWM (Basic PWM) -------------------------------------------------------
-#define BPWM0_ENABLE		false   ///< Basic PWM channel 0: disabled
-#define BPWM1_ENABLE		false   ///< Basic PWM channel 1: disabled
+/// Timer 0: disabled. TMR0 is reserved for the RUNTIME system tick (YSS_TIMER).
+#define TIMER0_ENABLE		true
 
-// --- EADC (Enhanced Analog-to-Digital Converter) ----------------------------
-#define EADC_ENABLE			true    ///< EADC: enabled (used for analog sensing)
+/// Timer 1: enabled. Used to generate a 10 Hz interrupt (isr_timer1).
+#define TIMER1_ENABLE		true
 
-// --- I2C (Inter-Integrated Circuit) -----------------------------------------
-#define I2C0_ENABLE			false   ///< I2C bus 0: disabled
-#define I2C1_ENABLE			false   ///< I2C bus 1: disabled
+/// Timer 2: enabled. Used to generate a 100 Hz interrupt (isr_timer2).
+#define TIMER2_ENABLE		false
 
-// --- I2S (Inter-IC Sound) ---------------------------------------------------
-#define I2S0_ENABLE			false   ///< I2S audio interface 0: disabled
+/// Timer 3: enabled. Used to generate a 1 kHz interrupt (isr_timer3).
+#define TIMER3_ENABLE		true
 
-// --- PWM (Pulse Width Modulation) -------------------------------------------
-#define PWM0_ENABLE			false   ///< PWM channel 0: disabled
-#define PWM1_ENABLE			false   ///< PWM channel 1: disabled
-#define PWM2_ENABLE			false   ///< PWM channel 2: disabled
-#define PWM3_ENABLE			false   ///< PWM channel 3: disabled
+/// Timer 4: enabled. Used to generate a 10 kHz interrupt (isr_timer4) on CPU1.
+#define TIMER4_ENABLE		true
 
-// --- QSPI (Quad SPI) --------------------------------------------------------
-#define	QSPI0_ENABLE		true    ///< QSPI interface 0: enabled
-
-// --- SPI (Serial Peripheral Interface) --------------------------------------
-#define SPI0_ENABLE			false   ///< SPI bus 0: disabled
-
-// --- Timer ------------------------------------------------------------------
-#define TIMER0_ENABLE		false   ///< Timer 0: disabled (TMR0 reserved for RUNTIME)
-#define TIMER1_ENABLE		false   ///< Timer 1: disabled
-#define TIMER2_ENABLE		false   ///< Timer 2: disabled
-#define TIMER3_ENABLE		false   ///< Timer 3: disabled
-
-// --- UART (Universal Asynchronous Receiver/Transmitter) ---------------------
-#define UART0_ENABLE		false   ///< UART 0: disabled
-#define UART1_ENABLE		false   ///< UART 1: disabled
-#define UART2_ENABLE		false   ///< UART 2: disabled
-
-// --- USCI (Universal Serial Control Interface) ------------------------------
-#define USPI0_ENABLE		false   ///< USCI SPI mode 0: disabled
-#define UUART0_ENABLE		true    ///< USCI UART mode 0: enabled (used for debug output)
+/// Timer 5: enabled. Used to generate a 100 kHz interrupt (isr_timer5) on CPU1.
+#define TIMER5_ENABLE		true
 
 /// @}
 
