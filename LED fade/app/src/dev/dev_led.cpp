@@ -11,19 +11,18 @@
  *
  * @details
  * Implements the `led` namespace functions declared in `dev/led.h`.
- * Each color channel of the RGB LED is driven by a dedicated GPIO0 pin
- * configured as a push-pull active-low output.
+ * Each color channel of the RGB LED is driven by a hardware timer using
+ * PWM to control its brightness.
  *
  * ### Hardware Pin Assignment
- * | Color  | GPIO Port | Pin | Active Level |
- * |--------|-----------|-----|--------------|
- * | Red    | GPIO0     | 29  | Active-low   |
- * | Blue   | GPIO0     | 30  | Active-low   |
- * | Green  | GPIO0     | 31  | Active-low   |
+ * | Color  | GPIO Port | Pin | Timer Alternate Function |
+ * |--------|-----------|-----|--------------------------|
+ * | Red    | GPIO0     | 29  | TMR5                     |
+ * | Blue   | GPIO0     | 30  | TMR0                     |
+ * | Green  | GPIO0     | 31  | TMR1                     |
  *
- * Because the pins are active-low, the `setOutput()` call inverts the
- * logical `on` parameter (`!on`) so that callers always use
- * `true` = ON and `false` = OFF.
+ * The `setDutyRatio()` functions are used to set the PWM duty cycle for each
+ * color, enabling smooth fading rather than simple ON/OFF control.
  */
 
 #include <dev/led.h>      ///< RGB LED driver declarations
@@ -32,12 +31,13 @@
 namespace led
 {
 	/**
-	 * @brief Initializes the RGB LED GPIO pins and sets all LEDs to OFF.
+	 * @brief Initializes the RGB LED GPIO pins and PWM timers.
 	 *
 	 * @details
-	 * Configures GPIO0 pins 29, 30, and 31 as push-pull digital outputs,
-	 * then calls each `set*()` function with `false` to ensure all three
-	 * color channels start in the OFF state.
+	 * Configures GPIO0 pins 29, 30, and 31 to use their alternate functions
+	 * for hardware timers (TMR5, TMR0, TMR1).
+	 * Sets the PWM frequency to 5000 Hz and starts the timers with a 0.0
+	 * duty ratio to ensure all three color channels start in the OFF state.
 	 */
 	void initialize(void)
 	{
@@ -62,9 +62,9 @@ namespace led
 	}
 
 	/**
-	 * @brief Controls the Red LED (GPIO0 pin 29, active-low).
+	 * @brief Controls the Red LED brightness.
 	 *
-	 * @param[in] on @c true to turn the Red LED ON, @c false to turn it OFF.
+	 * @param[in] ratio Duty cycle ratio (0.0 to 1.0).
 	 */
 	void setRed(float ratio)
 	{
@@ -72,9 +72,9 @@ namespace led
 	}
 
 	/**
-	 * @brief Controls the Blue LED (GPIO0 pin 30, active-low).
+	 * @brief Controls the Blue LED brightness.
 	 *
-	 * @param[in] on @c true to turn the Blue LED ON, @c false to turn it OFF.
+	 * @param[in] ratio Duty cycle ratio (0.0 to 1.0).
 	 */
 	void setBlue(float ratio)
 	{
@@ -82,9 +82,9 @@ namespace led
 	}
 
 	/**
-	 * @brief Controls the Green LED (GPIO0 pin 31, active-low).
+	 * @brief Controls the Green LED brightness.
 	 *
-	 * @param[in] on @c true to turn the Green LED ON, @c false to turn it OFF.
+	 * @param[in] ratio Duty cycle ratio (0.0 to 1.0).
 	 */
 	void setGreen(float ratio)
 	{

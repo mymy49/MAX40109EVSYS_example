@@ -7,7 +7,7 @@
 
 /**
  * @file config.h
- * @brief yss RTOS and peripheral build-time configuration for the timer example.
+ * @brief yss RTOS and peripheral build-time configuration for the LED fade example.
  *
  * @details
  * Contains compile-time configuration settings for the yss RTOS framework
@@ -97,24 +97,25 @@
 /// @defgroup TimerEnable Timer Enable Flags
 /// @{
 
-/// Timer 0: disabled. TMR0 is reserved for the RUNTIME system tick (YSS_TIMER).
+/// Timer 0: enabled. Used for Blue LED PWM.
 #define TIMER0_ENABLE		true
 
-/// Timer 1: enabled. Used to generate a 10 Hz interrupt (isr_timer1).
+/// Timer 1: enabled. Used for Green LED PWM.
 #define TIMER1_ENABLE		true
 
-/// Timer 2: enabled. Used to generate a 100 Hz interrupt (isr_timer2).
+/// Timer 2: disabled.
 #define TIMER2_ENABLE		false
 
-/// Timer 3: enabled. Used to generate a 1 kHz interrupt (isr_timer3).
+/// Timer 3: enabled. Not used in this example.
 #define TIMER3_ENABLE		true
 
-/// Timer 4: enabled. Used to generate a 10 kHz interrupt (isr_timer4) on CPU1.
+/// Timer 4: enabled. Not used in this example.
 #define TIMER4_ENABLE		true
 
-/// Timer 5: enabled. Used to generate a 100 kHz interrupt (isr_timer5) on CPU1.
+/// Timer 5: enabled. Used for Red LED PWM.
 #define TIMER5_ENABLE		true
 
 /// @}
 
 #endif
+
